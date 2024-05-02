@@ -4,14 +4,6 @@
         <h2 class="font-semibold text-xl text-center text-gray-800 leading-tight">
             Groups
         </h2>
-
-        <nav>
-            <ul class="flex space-x-4 justify-center">
-                <li><a href="{{ route('groups.index') }}" class="text-blue-500 hover:text-blue-800">Groups</a></li>
-                <li><a href="{{ route('sections.index') }}" class="text-blue-500 hover:text-blue-800">Sections</a></li>
-                <li><a href="{{ route('students.index') }}" class="text-blue-500 hover:text-blue-800">Students</a></li>
-            </ul>
-        </nav>
     </x-slot>
 
     <div class="py-12">

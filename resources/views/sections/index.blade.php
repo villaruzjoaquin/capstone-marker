@@ -3,14 +3,6 @@
         <h2 class="font-semibold text-xl text-center text-gray-800 leading-tight">
             Sections
         </h2>
-
-        <nav>
-            <ul class="flex space-x-4 justify-center">
-                <li><a href="{{ route('groups.index') }}" class="text-blue-500 hover:text-blue-800">Groups</a></li>
-                <li><a href="{{ route('sections.index') }}" class="text-blue-500 hover:text-blue-800">Sections</a></li>
-                <li><a href="{{ route('students.index') }}" class="text-blue-500 hover:text-blue-800">Students</a></li>
-            </ul>
-        </nav>
     </x-slot>
 
     <div class="py-12">
@@ -32,11 +24,11 @@
                                 {{ $section->description }}
                             </p>
                             <!-- Edit button -->
-                            <div class="text-right">
-                                <a href="{{ route('sections.edit', $section) }}" class="text-blue-600 hover:text-blue-900">
+                            <div class="mt-5">
+                                <a href="{{ route('sections.edit', $section) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     Edit
                                 </a>
-                            </div>
+                            </div>                            
                         </div>
                     </div>
                 @endforeach
