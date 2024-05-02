@@ -28,4 +28,9 @@ class Group extends Model
         // A group belongs to one section
         return $this->belongsTo(Section::class);
     }
+
+    public function todos()
+    {
+        return $this->hasMany(ToDo::class);
+    }
 }

@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.animate__fadeOut {
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

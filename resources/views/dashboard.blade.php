@@ -1,6 +1,11 @@
 <x-app-layout>
     <div class="py-12 bg-gray-100">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            @if (session('success'))
+                    <div class="font-medium text-sm text-green-600">
+                        {{ session('success') }}
+                    </div>
+            @endif
             <!-- User welcome and profile info -->
             <div class="bg-white p-6 shadow-sm rounded-lg flex justify-between items-center mb-6">
                 <div class="flex items-center space-x-4">
@@ -14,7 +19,6 @@
                     Wipe Everything
                 </button>
             </div>
-            
 
             <!-- Sections -->
             <div class="bg-white p-6 shadow-sm rounded-lg">
@@ -36,8 +40,40 @@
                     @endforeach
                 </div>
             </div>
+
+            <div class="bg-white p-6 shadow-sm rounded-lg mt-6">
+                <h3 class="text-2xl font-semibold text-gray-900">To-Do List</h3>
+                <div class="mt-4">
+                    @forelse ($todos as $todo)
+                    <form id="todoForm{{ $todo->id }}" action="{{ route('todos.delete', $todo->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <div class="mb-4 p-4 bg-gray-100 rounded border flex justify-between items-center">
+                            <div>
+                                <h5 class="font-semibold text-lg">{{ $todo->task }}</h5>
+                                <p class="text-sm text-gray-700">Assigned to group: <strong>{{ $todo->group->group_name }}</strong></p>
+                                <p class="text-sm {{ $todo->completed ? 'text-gray-700' : 'text-red-500' }}"> {{ $todo->completed ? 'Completed' : 'Incomplete' }}</p>
+                            </div>
+                            <input type="checkbox" name="completed" onchange="handleCheckboxChange(event, {{ $todo->id }})" class="form-checkbox h-6 w-6 text-blue-500" {{ $todo->completed ? 'checked' : '' }}>
+                        </div>
+                    </form>
+                    @empty
+                    <p class="text-gray-700">No to-dos found.</p>
+                    @endforelse
+                </div>
+            </div>
+            
+            
+            <div class="mt-4">
+                {{ $todos->links() }}
+            </div>                   
         </div>
     </div>
+
+    <audio id="successSound">
+        <source src="{{ asset('success.mp3') }}" type="audio/mpeg">
+    </audio>
+    
 
     <script>
         function confirmNuke() {
@@ -45,5 +81,23 @@
                 window.location.href = "{{ route('nuke') }}";
             }
         }
+
+        function handleCheckboxChange(event, todoId) {
+        const form = document.getElementById(`todoForm${todoId}`);
+        const sound = document.getElementById('successSound');
+
+        sound.playbackRate = 1.0; 
+        sound.volume = 0.2;
+
+        if (event.target.checked) {
+            form.classList.add('animate__fadeOut'); 
+
+            setTimeout(function() {
+                form.submit();
+            }, 1000); 
+
+            sound.play();
+        }
+    }
     </script>
 </x-app-layout>

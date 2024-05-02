@@ -27,6 +27,11 @@
                 <a href="{{ route('students.index') }}" class="block py-2 px-4 hover:bg-gray-700 flex-grow">Student</a>
                 <a href="{{ route('students.create') }}" class="text-lg font-bold py-2 px-4 hover:bg-gray-700 text-white-800">+</a>
             </li>
+
+            <li class="flex justify-between items-center">
+                <a href="{{ route('todos.create') }}" class="block py-2 px-4 hover:bg-gray-700 flex-grow">Add New ToDo</a>
+            </li>
+        
         </ul>
         
         <div>
