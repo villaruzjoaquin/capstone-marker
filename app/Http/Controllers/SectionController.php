@@ -25,7 +25,7 @@ class SectionController extends Controller
         $request->validate([
             'course_name' => 'required|string|max:255',
             'section_code' => 'required|string|max:255',
-            'description' => 'string|max:255',
+            'description' => 'nullable|string|max:300',
         ]);
 
         $section = new Section;

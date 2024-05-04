@@ -7,17 +7,20 @@
                     @csrf
                     <div>
                         <label for="group_name" class="block text-sm font-medium text-gray-700">Group Name:</label>
-                        <input type="text" id="group_name" name="group_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <x-text-input type="text" id="group_name" name="group_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></x-text-input>
+                        <x-input-error class="mt-2 productserr" :messages="$errors->get('group_name')" />
                     </div>
                     
                     <!-- Dropdown for selecting a section -->
                     <div>
                         <label for="section_id" class="block text-sm font-medium text-gray-700">Section:</label>
                         <select id="section_id" name="section_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <option value="default" selected disabled>Select Section</option>
                             @foreach($sections as $section)
                                 <option value="{{ $section->id }}">{{ $section->course_name }} ({{ $section->section_code }})</option>
                             @endforeach
                         </select>
+                        <x-input-error class="mt-2 productserr" :messages="$errors->get('section_id')" />
                     </div>
 
                     <div class="flex justify-end">

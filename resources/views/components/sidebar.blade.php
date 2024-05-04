@@ -29,6 +29,10 @@
             </li>
 
             <li class="flex justify-between items-center">
+                <a href="{{ route('profile.edit') }}" class="block py-2 px-4 hover:bg-gray-700 flex-grow">Profile</a>
+            </li>
+
+            <li class="flex justify-between items-center">
                 <a href="{{ route('todos.create') }}" class="block py-2 px-4 hover:bg-gray-700 flex-grow">Add New ToDo</a>
             </li>
         

@@ -28,6 +28,9 @@ class GroupController extends Controller
         $request->validate([
             'group_name' => 'required|string|max:255',
             'section_id' => 'required|exists:sections,id',
+        ],
+        [
+            'section_id.required' => "Please select a valid section.",
         ]);
 
         $group = new Group;

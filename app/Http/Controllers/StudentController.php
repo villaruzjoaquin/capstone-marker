@@ -46,10 +46,34 @@ class StudentController extends Controller
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'group_id' => 'required|exists:groups,id',
-            'strengths' => 'required|in:developer,designer,fullstack',
-            'comments' => 'nullable|string',
+            'strengths' => [
+                'required',
+                'in:developer,designer,fullstack',
+                function ($attribute, $value, $fail) {
+                    if ($value === 'default') {
+                        $fail('Please select a valid strength.');
+                    }
+                },
+            ],
+            'comments' => 'nullable|string|max:600',
+            'group_id' => [
+                'required',
+                'exists:groups,id',
+                function ($attribute, $value, $fail){
+                    if($value == 'default'){
+                        $fail('Please select a group.');
+                    }
+                }
+            ],
+        ], [
+            'first_name.required' => 'First Name field cannot be empty.',
+            'last_name.required' => 'Last Name field cannot be empty.',
+            'group_id.exists' => 'Group has to exist',
+            'group_id.required' => "Please select a valid group.",
+            'strengths.required' => 'Please choose at least one.',
+            'comments.max' => 'Comments cannot be longer than 600 characters',
         ]);
+        
 
         $student = new Student;
         $student->first_name = $request->first_name;
